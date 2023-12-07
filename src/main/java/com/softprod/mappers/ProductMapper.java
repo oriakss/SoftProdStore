@@ -9,6 +9,8 @@ import static java.lang.Double.parseDouble;
 
 public class ProductMapper {
 
+    private static ProductMapper productMapper;
+
     public Product buildProduct(HttpServletRequest req) {
         return Product.builder()
                 .name(req.getParameter(PRODUCT_NAME))
@@ -16,5 +18,15 @@ public class ProductMapper {
                 .category(req.getParameter(PRODUCT_CATEGORY))
                 .price(parseDouble(req.getParameter(PRODUCT_PRICE)))
                 .build();
+    }
+
+    public static ProductMapper getInstance() {
+        if (productMapper == null) {
+            productMapper = new ProductMapper();
+        }
+        return productMapper;
+    }
+
+    private ProductMapper() {
     }
 }

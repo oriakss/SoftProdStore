@@ -6,14 +6,10 @@ import com.softprod.repositories.UserRepositoryImpl;
 
 import java.util.List;
 
-
 public class UserServiceImpl implements UserService {
 
     private static UserService userService;
-
     private final UserRepository userRepository = UserRepositoryImpl.getInstance();
-
-    private UserServiceImpl() {}
 
     @Override
     public User createUser(User user) {
@@ -31,8 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(User user) {
-        return userRepository.deleteUser(user).orElseThrow();
+    public User deleteUser(Long userId) {
+        return userRepository.deleteUser(userId).orElseThrow();
     }
 
     public static UserService getInstance() {
@@ -40,5 +36,8 @@ public class UserServiceImpl implements UserService {
             userService = new UserServiceImpl();
         }
         return userService;
+    }
+
+    private UserServiceImpl() {
     }
 }

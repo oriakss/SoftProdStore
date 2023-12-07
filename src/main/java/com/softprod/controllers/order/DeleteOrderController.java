@@ -1,6 +1,5 @@
-package com.softprod.controllers;
+package com.softprod.controllers.order;
 
-import com.softprod.entities.Order;
 import com.softprod.services.OrderService;
 
 import javax.servlet.ServletException;
@@ -21,9 +20,7 @@ public class DeleteOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Order order = new Order();
-        order.setId(parseLong(req.getParameter(ID)));
-        orderService.deleteOrder(order);
+        orderService.deleteOrder(parseLong(req.getParameter(ID)));
         req.getRequestDispatcher(ORDERS_MENU).forward(req, resp);
     }
 }

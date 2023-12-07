@@ -10,7 +10,7 @@ public interface OrderService {
 
     List<Order> readOrders();
 
-    Order updateOrder(Order order);
+    Order updateOrder(Long orderId, String status);
 
-    Order deleteOrder(Order order);
+    Order deleteOrder(Long orderId);
 }

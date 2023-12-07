@@ -1,6 +1,7 @@
-package com.softprod.controllers;
+package com.softprod.controllers.user;
 
 import com.softprod.entities.User;
+import com.softprod.mappers.UserMapper;
 import com.softprod.services.UserService;
 
 import javax.servlet.ServletException;
@@ -12,18 +13,22 @@ import java.io.IOException;
 
 import static com.softprod.services.UserServiceImpl.getInstance;
 import static com.softprod.utils.Constants.*;
-import static java.lang.Long.valueOf;
 
-@WebServlet(urlPatterns = USERS_DELETE)
-public class DeleteUserController extends HttpServlet {
+@WebServlet(urlPatterns = USERS_CREATE)
+public class CreateUserController extends HttpServlet {
 
     private final UserService userService = getInstance();
+    private final UserMapper userMapper = UserMapper.getInstance();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher(USERS_CREATE_PAGE).forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User();
-        user.setId(valueOf(req.getParameter(ID)));
-        userService.deleteUser(user);
+        User user = userMapper.buildUser(req);
+        userService.createUser(user);
         req.getRequestDispatcher(USERS_MENU).forward(req, resp);
     }
 }

@@ -7,26 +7,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.softprod.utils.Constants.DEFAULT_ID;
+import static com.softprod.utils.Constants.ONE_STEP;
+
 public class OrderRepositoryImpl implements OrderRepository {
 
     private static OrderRepository orderRepository;
-
     private final List<Order> orders = new ArrayList<>();
-
-    private OrderRepositoryImpl() {
-        orders.add(new Order(1L, null, 1000, 7, "done"));
-        orders.add(new Order(2L, null, 2300, 14, "canceled"));
-        orders.add(new Order(3L, null, 5000, 4, "processing"));
-        orders.add(new Order(4L, null, 6600, 8, "processing"));
-        orders.add(new Order(5L, null, 1200, 5, "done"));
-    }
 
     @Override
     public Optional<Order> createOrder(Order order) {
         if (orders.isEmpty()) {
-            order.setId(1L);
+            order.setId(DEFAULT_ID);
         } else {
-            order.setId(orders.get(orders.size() - 1).getId() + 1);
+            order.setId(orders.get(orders.size() - ONE_STEP).getId() + DEFAULT_ID);
         }
         orders.add(order);
         return Optional.of(order);
@@ -38,22 +32,19 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public Optional<Order> updateOrder(Order order) {
-        Order oldStatusOrder = orders.stream()
-                .filter(item -> Objects.equals(item.getId(), order.getId()))
-                .findAny().orElseThrow();
-        oldStatusOrder.setStatus(order.getStatus());
-        return Optional.of(oldStatusOrder);
-
+    public Optional<Order> updateOrder(Long orderId) {
+        return orders.stream()
+                .filter(item -> Objects.equals(item.getId(), orderId))
+                .findAny();
     }
 
     @Override
-    public Optional<Order> deleteOrder(Order order) {
-        Order delOrder = orders.stream()
-                .filter(item -> Objects.equals(item.getId(), order.getId()))
+    public Optional<Order> deleteOrder(Long orderId) {
+        Order order = orders.stream()
+                .filter(item -> Objects.equals(item.getId(), orderId))
                 .findAny().orElseThrow();
-        orders.remove(delOrder);
-        return Optional.of(delOrder);
+        orders.remove(order);
+        return Optional.of(order);
     }
 
     public static OrderRepository getInstance() {
@@ -61,5 +52,13 @@ public class OrderRepositoryImpl implements OrderRepository {
             orderRepository = new OrderRepositoryImpl();
         }
         return orderRepository;
+    }
+
+    private OrderRepositoryImpl() {
+        orders.add(new Order(1L, null, 1000, 7, "done"));
+        orders.add(new Order(2L, null, 2300, 14, "canceled"));
+        orders.add(new Order(3L, null, 5000, 4, "processing"));
+        orders.add(new Order(4L, null, 6600, 8, "processing"));
+        orders.add(new Order(5L, null, 1200, 5, "done"));
     }
 }

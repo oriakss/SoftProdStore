@@ -13,5 +13,5 @@ public interface UserRepository {
 
     Optional<User> updateUser(User user);
 
-    Optional<User> deleteUser(User user);
+    Optional<User> deleteUser(Long userId);
 }

@@ -9,6 +9,8 @@ import static com.softprod.utils.Constants.*;
 
 public class UserMapper {
 
+    private static UserMapper userMapper;
+
     public User buildUser(HttpServletRequest req) {
         return User.builder()
                 .firstname(req.getParameter(USER_FIRSTNAME))
@@ -18,5 +20,15 @@ public class UserMapper {
                 .password(req.getParameter(USER_PASSWORD))
                 .userRole(UserRole.valueOf(req.getParameter(USER_ROLE)))
                 .build();
+    }
+
+    public static UserMapper getInstance() {
+        if (userMapper == null) {
+            userMapper = new UserMapper();
+        }
+        return userMapper;
+    }
+
+    private UserMapper() {
     }
 }

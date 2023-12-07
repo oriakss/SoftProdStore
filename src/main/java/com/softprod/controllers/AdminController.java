@@ -28,31 +28,39 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         switch (req.getRequestURI()) {
-            case ADMIN_MENU -> {
-                HttpSession session = req.getSession();
-                session.setAttribute(USER_ROLE, ADMIN);
-                req.getRequestDispatcher(ADMIN_MENU_PAGE).forward(req, resp);
-            }
-            case USERS_MENU -> {
-                List<User> users = userService.readUsers();
-                req.setAttribute(USERS, users);
-                req.getRequestDispatcher(USERS_MENU_PAGE).forward(req, resp);
-            }
-            case PRODUCTS_MENU -> {
-                List<Product> products = productService.readProducts();
-                req.setAttribute(PRODUCTS, products);
-                req.getRequestDispatcher(PRODUCTS_MENU_PAGE).forward(req, resp);
-            }
-            case ORDERS_MENU -> {
-                List<Order> orders = orderService.readOrders();
-                req.setAttribute(ORDERS, orders);
-                req.getRequestDispatcher(ORDERS_MENU_PAGE).forward(req, resp);
-            }
+            case ADMIN_MENU -> openAdminMenu(req, resp);
+            case USERS_MENU -> openUsersMenu(req, resp);
+            case PRODUCTS_MENU -> openProductsMenu(req, resp);
+            case ORDERS_MENU -> openOrdersMenu(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
+    }
+
+    private void openOrdersMenu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Order> orders = orderService.readOrders();
+        req.setAttribute(ORDERS, orders);
+        req.getRequestDispatcher(ORDERS_MENU_PAGE).forward(req, resp);
+    }
+
+    private void openProductsMenu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> products = productService.readProducts();
+        req.setAttribute(PRODUCTS, products);
+        req.getRequestDispatcher(PRODUCTS_MENU_PAGE).forward(req, resp);
+    }
+
+    private void openUsersMenu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<User> users = userService.readUsers();
+        req.setAttribute(USERS, users);
+        req.getRequestDispatcher(USERS_MENU_PAGE).forward(req, resp);
+    }
+
+    private static void openAdminMenu(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        session.setAttribute(USER_ROLE, ADMIN);
+        req.getRequestDispatcher(ADMIN_MENU_PAGE).forward(req, resp);
     }
 }

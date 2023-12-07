@@ -7,26 +7,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.softprod.utils.Constants.DEFAULT_ID;
+import static com.softprod.utils.Constants.ONE_STEP;
+
 public class ProductRepositoryImpl implements ProductRepository {
 
     private static ProductRepository productRepository;
-
     private final List<Product> products = new ArrayList<>();
-
-    private ProductRepositoryImpl() {
-        products.add(new Product(1L, "product1", "brand1", "category1", 500));
-        products.add(new Product(2L, "product2", "brand2", "category2", 300));
-        products.add(new Product(3L, "product3", "brand3", "category3", 700));
-        products.add(new Product(4L, "product4", "brand4", "category4", 900));
-        products.add(new Product(5L, "product5", "brand5", "category5", 600));
-    }
 
     @Override
     public Optional<Product> createProduct(Product product) {
         if (products.isEmpty()) {
-            product.setId(1);
+            product.setId(DEFAULT_ID);
         } else {
-            product.setId(products.get(products.size() - 1).getId() + 1);
+            product.setId(products.get(products.size() - ONE_STEP).getId() + DEFAULT_ID);
         }
         products.add(product);
         return Optional.of(product);
@@ -49,12 +43,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Optional<Product> deleteProduct(Product product) {
-        Product delProduct = products.stream()
-                .filter(item -> Objects.equals(item.getId(), product.getId()))
+    public Optional<Product> deleteProduct(Long productId) {
+        Product product = products.stream()
+                .filter(item -> Objects.equals(item.getId(), productId))
                 .findAny().orElseThrow();
-        products.remove(delProduct);
-        return Optional.of(delProduct);
+        products.remove(product);
+        return Optional.of(product);
     }
 
     public static ProductRepository getInstance() {
@@ -62,5 +56,13 @@ public class ProductRepositoryImpl implements ProductRepository {
             productRepository = new ProductRepositoryImpl();
         }
         return productRepository;
+    }
+
+    private ProductRepositoryImpl() {
+        products.add(new Product(1L, "product1", "brand1", "category1", 500));
+        products.add(new Product(2L, "product2", "brand2", "category2", 300));
+        products.add(new Product(3L, "product3", "brand3", "category3", 700));
+        products.add(new Product(4L, "product4", "brand4", "category4", 900));
+        products.add(new Product(5L, "product5", "brand5", "category5", 600));
     }
 }

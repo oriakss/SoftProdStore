@@ -11,7 +11,7 @@ public interface OrderRepository {
 
     Optional<List<Order>> readOrders();
 
-    Optional<Order> updateOrder(Order order);
+    Optional<Order> updateOrder(Long orderId);
 
-    Optional<Order> deleteOrder(Order order);
+    Optional<Order> deleteOrder(Long orderId);
 }

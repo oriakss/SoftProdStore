@@ -1,8 +1,8 @@
 package com.softprod.services;
 
-import com.softprod.entities.User;
+import com.softprod.entities.UserRole;
 
 public interface AuthorizationService {
 
-    User logIn(User user);
+    UserRole checkUserByLoginAndPassword(String login, String password);
 }

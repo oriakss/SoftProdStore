@@ -1,6 +1,7 @@
-package com.softprod.controllers;
+package com.softprod.controllers.product;
 
 import com.softprod.entities.Product;
+import com.softprod.mappers.ProductMapper;
 import com.softprod.services.ProductService;
 
 import javax.servlet.ServletException;
@@ -9,25 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import static com.softprod.services.ProductServiceImpl.getInstance;
 import static com.softprod.utils.Constants.*;
+import static java.lang.Long.parseLong;
 
-@WebServlet(urlPatterns = PRODUCTS_READ)
-public class ReadProductController extends HttpServlet {
+@WebServlet(urlPatterns = PRODUCTS_UPDATE)
+public class UpdateProductController extends HttpServlet {
 
     private final ProductService productService = getInstance();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> products = productService.readProducts();
-        req.setAttribute(PRODUCTS, products);
-        req.getRequestDispatcher(PRODUCTS_READ_PAGE).forward(req, resp);
-    }
+    private final ProductMapper productMapper = ProductMapper.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        Product product = productMapper.buildProduct(req);
+        product.setId(parseLong((req.getParameter(ID))));
+        productService.updateProduct(product);
+        req.getRequestDispatcher(PRODUCTS_MENU).forward(req, resp);
     }
 }

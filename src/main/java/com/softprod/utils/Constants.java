@@ -61,4 +61,7 @@ public final class Constants {
     public static final String ACCESS_ERROR = "/pages/errors/access-error.jsp";
     public static final String REGISTRATION_ERROR = "/pages/errors/registration-error.jsp";
     public static final String REGISTRATION_PAGE = "/pages/registration.jsp";
+
+    public static final long DEFAULT_ID = 1L;
+    public static final int ONE_STEP = 1;
 }

@@ -9,10 +9,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private static OrderService orderService;
-
     private final OrderRepository orderRepository = OrderRepositoryImpl.getInstance();
-
-    private OrderServiceImpl() {}
 
     @Override
     public Order createOrder(Order order) {
@@ -25,13 +22,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Order order) {
-        return orderRepository.updateOrder(order).orElseThrow();
+    public Order updateOrder(Long orderId, String status) {
+        Order order = orderRepository.updateOrder(orderId).orElseThrow();
+        order.setStatus(status);
+        return order;
     }
 
     @Override
-    public Order deleteOrder(Order order) {
-        return orderRepository.deleteOrder(order).orElseThrow();
+    public Order deleteOrder(Long orderId) {
+        return orderRepository.deleteOrder(orderId).orElseThrow();
     }
 
     public static OrderService getInstance() {
@@ -39,5 +38,8 @@ public class OrderServiceImpl implements OrderService {
             orderService = new OrderServiceImpl();
         }
         return orderService;
+    }
+
+    private OrderServiceImpl() {
     }
 }

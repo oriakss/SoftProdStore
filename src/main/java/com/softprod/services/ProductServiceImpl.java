@@ -6,13 +6,10 @@ import com.softprod.repositories.ProductRepositoryImpl;
 
 import java.util.List;
 
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private static ProductService productService;
-
     private final ProductRepository productRepository = ProductRepositoryImpl.getInstance();
-
-    private ProductServiceImpl() {}
 
     @Override
     public Product createProduct(Product product) {
@@ -30,8 +27,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product deleteProduct(Product product) {
-        return productRepository.deleteProduct(product).orElseThrow();
+    public Product deleteProduct(Long productId) {
+        return productRepository.deleteProduct(productId).orElseThrow();
     }
 
     public static ProductService getInstance() {
@@ -39,5 +36,8 @@ public class ProductServiceImpl implements ProductService{
             productService = new ProductServiceImpl();
         }
         return productService;
+    }
+
+    private ProductServiceImpl() {
     }
 }

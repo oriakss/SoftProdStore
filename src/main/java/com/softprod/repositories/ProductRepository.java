@@ -13,5 +13,5 @@ public interface ProductRepository {
 
     Optional<Product> updateProduct(Product product);
 
-    Optional<Product> deleteProduct(Product product);
+    Optional<Product> deleteProduct(Long productId);
 }

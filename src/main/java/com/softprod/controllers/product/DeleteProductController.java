@@ -1,6 +1,5 @@
-package com.softprod.controllers;
+package com.softprod.controllers.product;
 
-import com.softprod.entities.Product;
 import com.softprod.services.ProductService;
 
 import javax.servlet.ServletException;
@@ -21,9 +20,7 @@ public class DeleteProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Product product = new Product();
-        product.setId(parseLong(req.getParameter(ID)));
-        productService.deleteProduct(product);
+        productService.deleteProduct(parseLong(req.getParameter(ID)));
         req.getRequestDispatcher(PRODUCTS_MENU).forward(req, resp);
     }
 }

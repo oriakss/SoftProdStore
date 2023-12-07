@@ -1,4 +1,4 @@
-package com.softprod.controllers;
+package com.softprod.controllers.user;
 
 import com.softprod.entities.User;
 import com.softprod.mappers.UserMapper;
@@ -13,22 +13,19 @@ import java.io.IOException;
 
 import static com.softprod.services.UserServiceImpl.getInstance;
 import static com.softprod.utils.Constants.*;
+import static java.lang.Long.valueOf;
 
-@WebServlet(urlPatterns = USERS_CREATE)
-public class CreateUserController extends HttpServlet {
+@WebServlet(urlPatterns = USERS_UPDATE)
+public class UpdateUserController extends HttpServlet {
 
     private final UserService userService = getInstance();
-    private final UserMapper userMapper = new UserMapper();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(USERS_CREATE_PAGE).forward(req, resp);
-    }
+    private final UserMapper userMapper = UserMapper.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = userMapper.buildUser(req);
-        userService.createUser(user);
+        user.setId(valueOf(req.getParameter(ID)));
+        userService.updateUser(user);
         req.getRequestDispatcher(USERS_MENU).forward(req, resp);
     }
 }
