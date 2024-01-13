@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static com.softprod.entities.UserRole.NO_ROLE;
-
 @Data
 @Builder
 @AllArgsConstructor
