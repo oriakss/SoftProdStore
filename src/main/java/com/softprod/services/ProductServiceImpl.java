@@ -12,8 +12,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository = ProductRepositoryImpl.getInstance();
 
     @Override
-    public Product createProduct(Product product) {
-        return productRepository.createProduct(product).orElseThrow();
+    public void createProduct(Product product) {
+        productRepository.createProduct(product).orElseThrow();
     }
 
     @Override
@@ -22,13 +22,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product product) {
-        return productRepository.updateProduct(product).orElseThrow();
+    public void updateProduct(Product product) {
+        productRepository.updateProduct(product).orElseThrow();
     }
 
     @Override
-    public Product deleteProduct(Long productId) {
-        return productRepository.deleteProduct(productId).orElseThrow();
+    public void deleteProduct(Long productId) {
+        productRepository.deleteProduct(productId).orElseThrow();
     }
 
     public static ProductService getInstance() {

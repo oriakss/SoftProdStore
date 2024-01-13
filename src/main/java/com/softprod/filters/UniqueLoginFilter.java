@@ -22,7 +22,8 @@ public class UniqueLoginFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        Optional<User> optionalUser = userService.readUsers().stream()
+        Optional<User> optionalUser = userService.readUsers()
+                .stream()
                 .filter(user -> user.getLogin().equals(req.getParameter(USER_LOGIN)))
                 .findAny();
         if (optionalUser.isPresent()) {

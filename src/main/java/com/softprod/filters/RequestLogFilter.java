@@ -24,8 +24,7 @@ public class RequestLogFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        Map<String, List<String>> headers = getHeaders(req);
-        log.info(req.getRequestURL() + " : " + headers);
+        log.info(req.getRequestURL() + " : " + getHeaders(req));
         chain.doFilter(req, res);
     }
 

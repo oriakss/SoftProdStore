@@ -12,8 +12,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository = OrderRepositoryImpl.getInstance();
 
     @Override
-    public Order createOrder(Order order) {
-        return orderRepository.createOrder(order).orElseThrow();
+    public void createOrder(Order order) {
+        orderRepository.createOrder(order).orElseThrow();
     }
 
     @Override
@@ -22,15 +22,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Long orderId, String status) {
+    public void updateOrder(Long orderId, String status) {
         Order order = orderRepository.updateOrder(orderId).orElseThrow();
         order.setStatus(status);
-        return order;
     }
 
     @Override
-    public Order deleteOrder(Long orderId) {
-        return orderRepository.deleteOrder(orderId).orElseThrow();
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteOrder(orderId).orElseThrow();
     }
 
     public static OrderService getInstance() {

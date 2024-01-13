@@ -1,6 +1,5 @@
 package com.softprod.controllers;
 
-import com.softprod.entities.User;
 import com.softprod.mappers.UserMapper;
 import com.softprod.services.UserService;
 
@@ -27,9 +26,8 @@ public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = userMapper.buildUser(req);
-        userService.createUser(user);
-        req.getSession().setAttribute(USER_ROLE, user.getUserRole());
+        userService.createUser(userMapper.buildUser(req));
+        req.getSession().setAttribute(USER_ROLE, req.getParameter(USER_ROLE));
         req.getRequestDispatcher(PRODUCTS_READ).forward(req, resp);
     }
 }

@@ -1,6 +1,5 @@
 package com.softprod.controllers.order;
 
-import com.softprod.entities.Order;
 import com.softprod.mappers.OrderMapper;
 import com.softprod.services.OrderService;
 
@@ -9,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 
 import static com.softprod.services.OrderServiceImpl.getInstance;
@@ -28,8 +26,7 @@ public class CreateOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Order order = orderMapper.buildOrder(req);
-        orderService.createOrder(order);
+        orderService.createOrder(orderMapper.buildOrder(req));
         req.getRequestDispatcher(ORDERS_MENU).forward(req, resp);
     }
 }

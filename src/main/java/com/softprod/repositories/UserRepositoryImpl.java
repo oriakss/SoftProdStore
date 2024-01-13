@@ -37,9 +37,10 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> updateUser(User user) {
         User oldUser = users.stream()
                 .filter(item -> Objects.equals(item.getId(), user.getId()))
-                .findAny().orElseThrow();
+                .findAny()
+                .orElseThrow();
         int ind = users.indexOf(oldUser);
-        users.remove(ind);
+        users.remove(oldUser);
         users.add(ind, user);
         return Optional.of(user);
     }
@@ -48,7 +49,8 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> deleteUser(Long userId) {
         User user = users.stream()
                 .filter(item -> Objects.equals(item.getId(), userId))
-                .findAny().orElseThrow();
+                .findAny()
+                .orElseThrow();
         users.remove(user);
         return Optional.of(user);
     }

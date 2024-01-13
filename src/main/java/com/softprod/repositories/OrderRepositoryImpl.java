@@ -42,7 +42,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     public Optional<Order> deleteOrder(Long orderId) {
         Order order = orders.stream()
                 .filter(item -> Objects.equals(item.getId(), orderId))
-                .findAny().orElseThrow();
+                .findAny()
+                .orElseThrow();
         orders.remove(order);
         return Optional.of(order);
     }

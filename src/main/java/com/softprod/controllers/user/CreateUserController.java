@@ -1,6 +1,5 @@
 package com.softprod.controllers.user;
 
-import com.softprod.entities.User;
 import com.softprod.mappers.UserMapper;
 import com.softprod.services.UserService;
 
@@ -27,8 +26,7 @@ public class CreateUserController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = userMapper.buildUser(req);
-        userService.createUser(user);
+        userService.createUser(userMapper.buildUser(req));
         req.getRequestDispatcher(USERS_MENU).forward(req, resp);
     }
 }

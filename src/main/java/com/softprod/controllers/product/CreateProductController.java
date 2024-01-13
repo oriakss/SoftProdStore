@@ -1,6 +1,5 @@
 package com.softprod.controllers.product;
 
-import com.softprod.entities.Product;
 import com.softprod.mappers.ProductMapper;
 import com.softprod.services.ProductService;
 
@@ -27,8 +26,7 @@ public class CreateProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Product product = productMapper.buildProduct(req);
-        productService.createProduct(product);
+        productService.createProduct(productMapper.buildProduct(req));
         req.getRequestDispatcher(PRODUCTS_MENU).forward(req, resp);
     }
 }

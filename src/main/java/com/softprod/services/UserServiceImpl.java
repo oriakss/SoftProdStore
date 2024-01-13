@@ -12,8 +12,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository = UserRepositoryImpl.getInstance();
 
     @Override
-    public User createUser(User user) {
-        return userRepository.createUser(user).orElseThrow();
+    public void createUser(User user) {
+        userRepository.createUser(user).orElseThrow();
     }
 
     @Override
@@ -22,13 +22,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
-        return userRepository.updateUser(user).orElseThrow();
+    public void updateUser(User user) {
+        userRepository.updateUser(user).orElseThrow();
     }
 
     @Override
-    public User deleteUser(Long userId) {
-        return userRepository.deleteUser(userId).orElseThrow();
+    public void deleteUser(Long userId) {
+        userRepository.deleteUser(userId).orElseThrow();
     }
 
     public static UserService getInstance() {

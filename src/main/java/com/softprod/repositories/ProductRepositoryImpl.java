@@ -35,7 +35,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Optional<Product> updateProduct(Product product) {
         Product oldProduct = products.stream()
                 .filter(item -> Objects.equals(item.getId(), product.getId()))
-                .findAny().orElseThrow();
+                .findAny()
+                .orElseThrow();
         int ind = products.indexOf(oldProduct);
         products.remove(oldProduct);
         products.add(ind, product);
@@ -46,7 +47,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Optional<Product> deleteProduct(Long productId) {
         Product product = products.stream()
                 .filter(item -> Objects.equals(item.getId(), productId))
-                .findAny().orElseThrow();
+                .findAny()
+                .orElseThrow();
         products.remove(product);
         return Optional.of(product);
     }
