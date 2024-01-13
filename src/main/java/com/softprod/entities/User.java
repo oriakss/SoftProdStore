@@ -19,5 +19,5 @@ public class User {
     private String email;
     private String login;
     private String password;
-    private UserRole userRole = NO_ROLE;
+    private UserRole userRole;
 }
