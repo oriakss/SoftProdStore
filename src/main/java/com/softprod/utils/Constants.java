@@ -62,6 +62,15 @@ public final class Constants {
     public static final String REGISTRATION_ERROR = "/pages/errors/registration-error.jsp";
     public static final String REGISTRATION_PAGE = "/pages/registration.jsp";
 
+    public static final String PERSON = "PERSON";
+    public static final String ID_COLUMN = "ID";
+    public static final String USER_FIRSTNAME_COLUMN = "FIRSTNAME";
+    public static final String USER_SURNAME_COLUMN = "SURNAME";
+    public static final String USER_EMAIL_COLUMN = "EMAIL";
+    public static final String USER_LOGIN_COLUMN = "LOGIN";
+    public static final String USER_PASSWORD_COLUMN = "PASSWORD";
+    public static final String USER_ROLE_COLUMN = "ROLE";
+
     public static final long DEFAULT_ID = 1L;
     public static final int ONE_STEP = 1;
 }

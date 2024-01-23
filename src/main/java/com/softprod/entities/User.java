@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static com.softprod.utils.Constants.*;
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -15,30 +16,30 @@ import static javax.persistence.GenerationType.AUTO;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PERSON")
+@Table(name = PERSON)
 public class User {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    @Column(name = "ID")
+    @Column(name = ID_COLUMN)
     private Long id;
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = USER_FIRSTNAME_COLUMN)
     private String firstname;
 
-    @Column(name = "SURNAME")
+    @Column(name = USER_SURNAME_COLUMN)
     private String surname;
 
-    @Column(name = "EMAIL")
+    @Column(name = USER_EMAIL_COLUMN)
     private String email;
 
-    @Column(name = "LOGIN")
+    @Column(name = USER_LOGIN_COLUMN)
     private String login;
 
-    @Column(name = "PASSWORD")
+    @Column(name = USER_PASSWORD_COLUMN)
     private String password;
 
     @Enumerated(STRING)
-    @Column(name = "ROLE")
+    @Column(name = USER_ROLE_COLUMN)
     private UserRole userRole;
 }
