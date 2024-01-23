@@ -22,6 +22,17 @@ public class UserMapper {
                 .build();
     }
 
+    public User buildUserManually(String firstname, String surname, String email, String login, String password, UserRole userRole) {
+        return User.builder()
+                .firstname(firstname)
+                .surname(surname)
+                .email(email)
+                .login(login)
+                .password(password)
+                .userRole(userRole)
+                .build();
+    }
+
     public static UserMapper getInstance() {
         if (userMapper == null) {
             userMapper = new UserMapper();

@@ -1,52 +1,110 @@
 package com.softprod.repositories;
 
 import com.softprod.entities.User;
+import com.softprod.mappers.UserMapper;
+import com.softprod.utils.JPAUtil;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.criteria.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import static com.softprod.entities.UserRole.ADMIN;
 import static com.softprod.entities.UserRole.USER;
-import static com.softprod.utils.Constants.DEFAULT_ID;
-import static com.softprod.utils.Constants.ONE_STEP;
+import static com.softprod.utils.Constants.*;
 
 public class UserRepositoryImpl implements UserRepository {
 
     private static UserRepository userRepository;
-    private final List<User> users = new ArrayList<>();
+    private final EntityManager entityManager = JPAUtil.getEntityManager();
+    private final EntityTransaction transaction = entityManager.getTransaction();
+    private final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    private List<User> users;
 
     @Override
     public Optional<User> createUser(User user) {
-        if (users.isEmpty()) {
-            user.setId(DEFAULT_ID);
-        } else {
-            user.setId(users.get(users.size() - ONE_STEP).getId() + DEFAULT_ID);
-        }
+        transaction.begin();
+        entityManager.persist(user);
+
+        CriteriaQuery<Long> userCriteriaQuery = criteriaBuilder.createQuery(Long.class);
+        Root<User> userRoot = userCriteriaQuery.from(User.class);
+
+        userCriteriaQuery
+                .select(userRoot.get(ID))
+                .where(criteriaBuilder.equal(userRoot.get(USER_LOGIN), user.getLogin()));
+        Long userId = entityManager
+                .createQuery(userCriteriaQuery)
+                .getResultList()
+                .stream()
+                .findAny()
+                .orElseThrow();
+
+        transaction.commit();
+
+        user.setId(userId);
         users.add(user);
         return Optional.of(user);
     }
 
     @Override
     public Optional<List<User>> readUsers() {
+        if (users == null) {
+            transaction.begin();
+
+            CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
+            Root<User> userRoot = userCriteriaQuery.from(User.class);
+
+            userCriteriaQuery.select(userRoot);
+            users = entityManager.createQuery(userCriteriaQuery).getResultList();
+
+            transaction.commit();
+        }
         return Optional.of(users);
     }
 
     @Override
-    public Optional<User> updateUser(User user) {
-        User oldUser = users.stream()
-                .filter(item -> Objects.equals(item.getId(), user.getId()))
+    public Optional<User> updateUser(User updatedUser) {
+        transaction.begin();
+
+        CriteriaUpdate<User> userCriteriaUpdate = criteriaBuilder.createCriteriaUpdate(User.class);
+        Root<User> userRoot = userCriteriaUpdate.from(User.class);
+
+        userCriteriaUpdate
+                .set(USER_FIRSTNAME, updatedUser.getFirstname())
+                .set(USER_SURNAME, updatedUser.getSurname())
+                .set(USER_EMAIL, updatedUser.getEmail())
+                .set(USER_LOGIN, updatedUser.getLogin())
+                .set(USER_PASSWORD, updatedUser.getPassword())
+                .set(USER_ROLE, updatedUser.getUserRole())
+                .where((criteriaBuilder.equal(userRoot.get(ID), updatedUser.getId())));
+        entityManager.createQuery(userCriteriaUpdate).executeUpdate();
+
+        transaction.commit();
+
+        User user = users.stream()
+                .filter(item -> Objects.equals(item.getId(), updatedUser.getId()))
                 .findAny()
                 .orElseThrow();
-        int ind = users.indexOf(oldUser);
-        users.remove(oldUser);
-        users.add(ind, user);
-        return Optional.of(user);
+        int ind = users.indexOf(user);
+        users.remove(user);
+        users.add(ind, updatedUser);
+        return Optional.of(updatedUser);
     }
 
     @Override
     public Optional<User> deleteUser(Long userId) {
+        transaction.begin();
+
+        CriteriaDelete<User> userCriteriaDelete = criteriaBuilder.createCriteriaDelete(User.class);
+        Root<User> userRootDelete = userCriteriaDelete.from(User.class);
+
+        userCriteriaDelete.where(criteriaBuilder.equal(userRootDelete.get("id"), userId));
+        entityManager.createQuery(userCriteriaDelete).executeUpdate();
+
+        transaction.commit();
+
         User user = users.stream()
                 .filter(item -> Objects.equals(item.getId(), userId))
                 .findAny()
@@ -63,15 +121,21 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private UserRepositoryImpl() {
-        users.add(new User(1L, "Admin", "1", "admin@admin.com",
+        UserMapper userMapper = UserMapper.getInstance();
+
+        transaction.begin();
+
+        entityManager.persist(userMapper.buildUserManually("Admin", "1", "admin@admin.com",
                 "admin", "admin", ADMIN));
-        users.add(new User(2L, "User", "1", "user1@user.com",
+        entityManager.persist(userMapper.buildUserManually("User", "1", "user1@user.com",
                 "user1", "user1", USER));
-        users.add(new User(3L, "User", "2", "user2@user.com",
+        entityManager.persist(userMapper.buildUserManually("User", "2", "user2@user.com",
                 "user2", "user2", USER));
-        users.add(new User(4L, "User", "3", "user3@user.com",
+        entityManager.persist(userMapper.buildUserManually("User", "3", "user3@user.com",
                 "user3", "user3", USER));
-        users.add(new User(5L, "User", "4", "user4@user.com",
+        entityManager.persist(userMapper.buildUserManually("User", "4", "user4@user.com",
                 "user4", "user4", USER));
+
+        transaction.commit();
     }
 }
