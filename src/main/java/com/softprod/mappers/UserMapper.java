@@ -5,6 +5,7 @@ import com.softprod.entities.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.softprod.entities.UserRole.valueOf;
 import static com.softprod.utils.Constants.*;
 
 public class UserMapper {
@@ -18,7 +19,7 @@ public class UserMapper {
                 .email(req.getParameter(USER_EMAIL))
                 .login(req.getParameter(USER_LOGIN))
                 .password(req.getParameter(USER_PASSWORD))
-                .userRole(UserRole.valueOf(req.getParameter(USER_ROLE)))
+                .userRole(valueOf(req.getParameter(USER_ROLE)))
                 .build();
     }
 

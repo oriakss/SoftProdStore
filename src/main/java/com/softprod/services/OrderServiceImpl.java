@@ -1,6 +1,7 @@
 package com.softprod.services;
 
 import com.softprod.entities.Order;
+import com.softprod.entities.OrderStatus;
 import com.softprod.repositories.OrderRepository;
 import com.softprod.repositories.OrderRepositoryImpl;
 
@@ -22,9 +23,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(Long orderId, String status) {
-        Order order = orderRepository.updateOrder(orderId).orElseThrow();
-        order.setStatus(status);
+    public void updateOrder(Long orderId, OrderStatus status) {
+        orderRepository.updateOrder(orderId, status).orElseThrow();
     }
 
     @Override

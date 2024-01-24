@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.softprod.entities.ProductCategory" %>
 <html>
 <head>
     <title>PRODUCTS MENU</title>
@@ -22,7 +23,12 @@
                 <td><input type="text" name="id" value="${product.id}" readonly size="1"></td>
                 <td><input type="text" name="name" value="${product.name}" required></td>
                 <td><input type="text" name="brand" value="${product.brand}" required></td>
-                <td><input type="text" name="category" value="${product.category}" required></td>
+                <td><select name="category" required>
+                    <option>${product.category}</option>
+                    <c:forEach var="category" items="${ProductCategory.values()}">
+                        <option>${category}</option>
+                    </c:forEach>
+                </select></td>
                 <td><input type="text" name="price" value="${product.price}" required></td>
                 <td><input type="submit" formaction="/products/delete" value="Delete"></td>
                 <td><input type="submit" formaction="/products/update" value="Update"></td>

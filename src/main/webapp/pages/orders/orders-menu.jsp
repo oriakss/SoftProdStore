@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.softprod.entities.OrderStatus" %>
 <html>
 <head>
     <title>ORDERS MENU</title>
@@ -21,7 +22,12 @@
                 <td><input type="text" name="id" value="${order.id}" readonly size="1"></td>
                 <td><input type="text" name="totalPrice" value="${order.totalPrice}" readonly></td>
                 <td><input type="text" name="productsNum" value="${order.productsNum}" readonly></td>
-                <td><input type="text" name="status" value="${order.status}" required size="7"></td>
+                <td><select name="status" required>
+                    <option>${order.status}</option>
+                    <c:forEach var="status" items="${OrderStatus.values()}">
+                        <option>${status}</option>
+                    </c:forEach>
+                </select></td>
                 <td><input type="submit" formaction="/orders/delete" value="Delete"></td>
                 <td><input type="submit" formaction="/orders/update" value="Update"></td>
             </tr>

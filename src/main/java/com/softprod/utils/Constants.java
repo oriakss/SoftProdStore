@@ -18,6 +18,7 @@ public final class Constants {
     public static final String PRODUCT_CATEGORY = "category";
     public static final String PRODUCT_PRICE = "price";
     public static final String PRODUCTS = "products";
+    public static final String ORDER_UUID = "uuid";
     public static final String ORDER_PRICE = "totalPrice";
     public static final String ORDER_PRODUCTS_NUM = "productsNum";
     public static final String ORDER_STATUS = "status";
@@ -62,15 +63,27 @@ public final class Constants {
     public static final String REGISTRATION_ERROR = "/pages/errors/registration-error.jsp";
     public static final String REGISTRATION_PAGE = "/pages/registration.jsp";
 
-    public static final String PERSON = "PERSON";
     public static final String ID_COLUMN = "ID";
-    public static final String USER_FIRSTNAME_COLUMN = "FIRSTNAME";
-    public static final String USER_SURNAME_COLUMN = "SURNAME";
-    public static final String USER_EMAIL_COLUMN = "EMAIL";
-    public static final String USER_LOGIN_COLUMN = "LOGIN";
-    public static final String USER_PASSWORD_COLUMN = "PASSWORD";
-    public static final String USER_ROLE_COLUMN = "ROLE";
+    public static final String UUID_COLUMN = "UUID";
+    public static final String PERSON = "PERSON";
+    public static final String FIRSTNAME_COLUMN = "FIRSTNAME";
+    public static final String SURNAME_COLUMN = "SURNAME";
+    public static final String EMAIL_COLUMN = "EMAIL";
+    public static final String LOGIN_COLUMN = "LOGIN";
+    public static final String PASSWORD_COLUMN = "PASSWORD";
+    public static final String ORDERS_COLUMN = "ORDERS";
+    public static final String ROLE_COLUMN = "ROLE";
 
-    public static final long DEFAULT_ID = 1L;
-    public static final int ONE_STEP = 1;
+    public static final String PRODUCT = "PRODUCT";
+    public static final String NAME_COLUMN = "NAME";
+    public static final String BRAND_COLUMN = "BRAND";
+    public static final String CATEGORY_COLUMN = "CATEGORY";
+    public static final String PRICE_COLUMN = "PRICE";
+
+    public static final String BOOKING = "BOOKING";
+    public static final String PRODUCTS_COLUMN = "PRODUCTS";
+    public static final String TOTAL_PRICE_COLUMN = "TOTAL_PRICE";
+    public static final String PRODUCTS_NUM_COLUMN = "PRODUCTS_NUM";
+    public static final String STATUS_COLUMN = "STATUS";
+    public static final String USERS_COLUMN = "USERS";
 }

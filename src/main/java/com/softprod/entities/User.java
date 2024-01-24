@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 import static com.softprod.utils.Constants.*;
 import static javax.persistence.EnumType.STRING;
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Builder
@@ -20,26 +20,26 @@ import static javax.persistence.GenerationType.AUTO;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = ID_COLUMN)
     private Long id;
 
-    @Column(name = USER_FIRSTNAME_COLUMN)
+    @Column(name = FIRSTNAME_COLUMN)
     private String firstname;
 
-    @Column(name = USER_SURNAME_COLUMN)
+    @Column(name = SURNAME_COLUMN)
     private String surname;
 
-    @Column(name = USER_EMAIL_COLUMN)
+    @Column(name = EMAIL_COLUMN)
     private String email;
 
-    @Column(name = USER_LOGIN_COLUMN)
+    @Column(name = LOGIN_COLUMN)
     private String login;
 
-    @Column(name = USER_PASSWORD_COLUMN)
+    @Column(name = PASSWORD_COLUMN)
     private String password;
 
     @Enumerated(STRING)
-    @Column(name = USER_ROLE_COLUMN)
+    @Column(name = ROLE_COLUMN)
     private UserRole userRole;
 }

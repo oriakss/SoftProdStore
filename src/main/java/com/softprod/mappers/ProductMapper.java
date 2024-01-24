@@ -1,11 +1,13 @@
 package com.softprod.mappers;
 
 import com.softprod.entities.Product;
+import com.softprod.entities.ProductCategory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
+import static com.softprod.entities.ProductCategory.valueOf;
 import static com.softprod.utils.Constants.*;
-import static java.lang.Double.parseDouble;
 
 public class ProductMapper {
 
@@ -15,8 +17,17 @@ public class ProductMapper {
         return Product.builder()
                 .name(req.getParameter(PRODUCT_NAME))
                 .brand(req.getParameter(PRODUCT_BRAND))
-                .category(req.getParameter(PRODUCT_CATEGORY))
-                .price(parseDouble(req.getParameter(PRODUCT_PRICE)))
+                .category(valueOf(req.getParameter(PRODUCT_CATEGORY)))
+                .price(new BigDecimal(req.getParameter(PRODUCT_PRICE)))
+                .build();
+    }
+
+    public Product buildProductManually(String name, String brand, ProductCategory category, BigDecimal price) {
+        return Product.builder()
+                .name(name)
+                .brand(brand)
+                .category(category)
+                .price(price)
                 .build();
     }
 

@@ -90,7 +90,7 @@ public class UserRepositoryImpl implements UserRepository {
         int ind = users.indexOf(user);
         users.remove(user);
         users.add(ind, updatedUser);
-        return Optional.of(updatedUser);
+        return Optional.of(user);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class UserRepositoryImpl implements UserRepository {
         CriteriaDelete<User> userCriteriaDelete = criteriaBuilder.createCriteriaDelete(User.class);
         Root<User> userRootDelete = userCriteriaDelete.from(User.class);
 
-        userCriteriaDelete.where(criteriaBuilder.equal(userRootDelete.get("id"), userId));
+        userCriteriaDelete.where(criteriaBuilder.equal(userRootDelete.get(ID), userId));
         entityManager.createQuery(userCriteriaDelete).executeUpdate();
 
         transaction.commit();
@@ -122,7 +122,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     private UserRepositoryImpl() {
         UserMapper userMapper = UserMapper.getInstance();
-
         transaction.begin();
 
         entityManager.persist(userMapper.buildUserManually("Admin", "1", "admin@admin.com",

@@ -5,17 +5,37 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.UUID;
+
+import static com.softprod.utils.Constants.*;
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = BOOKING)
 public class Order {
 
-    private long id;
-    private List<Product> order;
-    private double totalPrice;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = ID_COLUMN)
+    private Long id;
+
+    @Column(name = UUID_COLUMN)
+    private UUID uuid;
+
+    @Column(name = TOTAL_PRICE_COLUMN)
+    private BigDecimal totalPrice;
+
+    @Column(name = PRODUCTS_NUM_COLUMN)
     private int productsNum;
-    private String status;
+
+    @Enumerated(STRING)
+    @Column(name = STATUS_COLUMN)
+    private OrderStatus status;
 }

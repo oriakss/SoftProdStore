@@ -1,5 +1,6 @@
 package com.softprod.controllers.order;
 
+import com.softprod.entities.OrderStatus;
 import com.softprod.services.OrderService;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ public class UpdateOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        orderService.updateOrder(parseLong(req.getParameter(ID)), req.getParameter(ORDER_STATUS));
+        orderService.updateOrder(parseLong(req.getParameter(ID)), OrderStatus.valueOf(req.getParameter(ORDER_STATUS)));
         req.getRequestDispatcher(ORDERS_MENU).forward(req, resp);
     }
 }
