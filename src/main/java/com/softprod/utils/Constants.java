@@ -86,4 +86,6 @@ public final class Constants {
     public static final String PRODUCTS_NUM_COLUMN = "PRODUCTS_NUM";
     public static final String STATUS_COLUMN = "STATUS";
     public static final String USERS_COLUMN = "USERS";
+
+    public static final String MARKET = "Market";
 }

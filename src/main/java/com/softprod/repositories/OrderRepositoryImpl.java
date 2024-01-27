@@ -51,7 +51,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Optional<List<Order>> readOrders() {
-        if (orders == null) {
+        if (orders == null || orders.isEmpty()) {
             transaction.begin();
 
             CriteriaQuery<Order> orderCriteriaQuery = criteriaBuilder.createQuery(Order.class);
@@ -115,14 +115,16 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     private OrderRepositoryImpl() {
-        OrderMapper orderMapper = OrderMapper.getInstance();
-        transaction.begin();
+        if (readOrders().orElseThrow().isEmpty()) {
+            OrderMapper orderMapper = OrderMapper.getInstance();
+            transaction.begin();
 
-        entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(2300), 14, CANCELED));
-        entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(5000), 4, IN_PROCESS));
-        entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(6600), 8, IN_PROCESS));
-        entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(1200), 5, COMPLETE));
+            entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(2300), 14, CANCELED));
+            entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(5000), 4, IN_PROCESS));
+            entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(6600), 8, IN_PROCESS));
+            entityManager.persist(orderMapper.buildOrderManually(new BigDecimal(1200), 5, COMPLETE));
 
-        transaction.commit();
+            transaction.commit();
+        }
     }
 }

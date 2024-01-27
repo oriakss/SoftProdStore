@@ -50,7 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<List<User>> readUsers() {
-        if (users == null) {
+        if (users == null || users.isEmpty()) {
             transaction.begin();
 
             CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
@@ -121,20 +121,22 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private UserRepositoryImpl() {
-        UserMapper userMapper = UserMapper.getInstance();
-        transaction.begin();
+        if (readUsers().orElseThrow().isEmpty()) {
+            UserMapper userMapper = UserMapper.getInstance();
+            transaction.begin();
 
-        entityManager.persist(userMapper.buildUserManually("Admin", "1", "admin@admin.com",
-                "admin", "admin", ADMIN));
-        entityManager.persist(userMapper.buildUserManually("User", "1", "user1@user.com",
-                "user1", "user1", USER));
-        entityManager.persist(userMapper.buildUserManually("User", "2", "user2@user.com",
-                "user2", "user2", USER));
-        entityManager.persist(userMapper.buildUserManually("User", "3", "user3@user.com",
-                "user3", "user3", USER));
-        entityManager.persist(userMapper.buildUserManually("User", "4", "user4@user.com",
-                "user4", "user4", USER));
+            entityManager.persist(userMapper.buildUserManually("Admin", "1", "admin@admin.com",
+                    "admin", "admin", ADMIN));
+            entityManager.persist(userMapper.buildUserManually("User", "1", "user1@user.com",
+                    "user1", "user1", USER));
+            entityManager.persist(userMapper.buildUserManually("User", "2", "user2@user.com",
+                    "user2", "user2", USER));
+            entityManager.persist(userMapper.buildUserManually("User", "3", "user3@user.com",
+                    "user3", "user3", USER));
+            entityManager.persist(userMapper.buildUserManually("User", "4", "user4@user.com",
+                    "user4", "user4", USER));
 
-        transaction.commit();
+            transaction.commit();
+        }
     }
 }

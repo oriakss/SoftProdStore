@@ -50,7 +50,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Optional<List<Product>> readProducts() {
-        if (products == null) {
+        if (products == null || products.isEmpty()) {
             transaction.begin();
 
             CriteriaQuery<Product> productCriteriaQuery = criteriaBuilder.createQuery(Product.class);
@@ -119,14 +119,16 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     private ProductRepositoryImpl() {
-        ProductMapper productMapper = ProductMapper.getInstance();
-        transaction.begin();
+        if (readProducts().orElseThrow().isEmpty()) {
+            ProductMapper productMapper = ProductMapper.getInstance();
+            transaction.begin();
 
-        entityManager.persist(productMapper.buildProductManually("product1", "brand1", MOTHERBOARD, new BigDecimal(600)));
-        entityManager.persist(productMapper.buildProductManually("product2", "brand2", CPU, new BigDecimal(300)));
-        entityManager.persist(productMapper.buildProductManually("product3", "brand3", MEMORY, new BigDecimal(700)));
-        entityManager.persist(productMapper.buildProductManually("product4", "brand4", GPU, new BigDecimal(900)));
+            entityManager.persist(productMapper.buildProductManually("product1", "brand1", MOTHERBOARD, new BigDecimal(600)));
+            entityManager.persist(productMapper.buildProductManually("product2", "brand2", CPU, new BigDecimal(300)));
+            entityManager.persist(productMapper.buildProductManually("product3", "brand3", MEMORY, new BigDecimal(700)));
+            entityManager.persist(productMapper.buildProductManually("product4", "brand4", GPU, new BigDecimal(900)));
 
-        transaction.commit();
+            transaction.commit();
+        }
     }
 }
