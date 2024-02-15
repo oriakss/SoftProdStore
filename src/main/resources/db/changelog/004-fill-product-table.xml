@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="004-fill-product-table" author="oriakss">
+        <insert tableName="PRODUCT">
+            <column name="NAME" value="Ryzen 5 3600"/>
+            <column name="BRAND" value="AMD"/>
+            <column name="CATEGORY" value="CPU"/>
+            <column name="PRICE" value="789.99"/>
+            <column name="STATUS" value="AVAILABLE"/>
+        </insert>
+        <insert tableName="PRODUCT">
+            <column name="NAME" value="Core i5"/>
+            <column name="BRAND" value="Intel"/>
+            <column name="CATEGORY" value="CPU"/>
+            <column name="PRICE" value="949.49"/>
+            <column name="STATUS" value="AVAILABLE"/>
+        </insert>
+        <insert tableName="PRODUCT">
+            <column name="NAME" value="3060ti"/>
+            <column name="BRAND" value="GIGABYTE"/>
+            <column name="CATEGORY" value="GPU"/>
+            <column name="PRICE" value="1529.99"/>
+            <column name="STATUS" value="AVAILABLE"/>
+        </insert>
+        <insert tableName="PRODUCT">
+            <column name="NAME" value="DDR-4 16GB"/>
+            <column name="BRAND" value="SAMSUNG"/>
+            <column name="CATEGORY" value="MEMORY"/>
+            <column name="PRICE" value="190.49"/>
+            <column name="STATUS" value="AVAILABLE"/>
+        </insert>
+        <insert tableName="PRODUCT">
+            <column name="NAME" value="TUF B450M"/>
+            <column name="BRAND" value="ASUS"/>
+            <column name="CATEGORY" value="MOTHERBOARD"/>
+            <column name="PRICE" value="324.99"/>
+            <column name="STATUS" value="AVAILABLE"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
