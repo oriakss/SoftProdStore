@@ -13,17 +13,17 @@
             <column name="ROLE" value="ADMIN"/>
         </insert>
         <insert tableName="CUSTOMER">
-            <column name="NAME" value="User1"/>
-            <column name="EMAIL" value="user1@customer.com"/>
-            <column name="LOGIN" value="user1"/>
-            <column name="PASSWORD" value="user1"/>
+            <column name="NAME" value="Customer1"/>
+            <column name="EMAIL" value="customer1@customer.com"/>
+            <column name="LOGIN" value="customer1"/>
+            <column name="PASSWORD" value="customer1"/>
             <column name="ROLE" value="CUSTOMER"/>
         </insert>
         <insert tableName="CUSTOMER">
-            <column name="NAME" value="User2"/>
-            <column name="EMAIL" value="user2@customer.com"/>
-            <column name="LOGIN" value="user2"/>
-            <column name="PASSWORD" value="user2"/>
+            <column name="NAME" value="Customer2"/>
+            <column name="EMAIL" value="customer2@customer.com"/>
+            <column name="LOGIN" value="customer2"/>
+            <column name="PASSWORD" value="customer2"/>
             <column name="ROLE" value="CUSTOMER"/>
         </insert>
     </changeSet>

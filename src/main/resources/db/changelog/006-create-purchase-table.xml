@@ -9,9 +9,15 @@
             <column name="ID" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="TOTAL_PRICE" type="NUMERIC"/>
-            <column name="PRODUCTS_NUM" type="BIGINT"/>
-            <column name="STATUS" type="VARCHAR"/>
+            <column name="TOTAL_PRICE" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRODUCTS_NUM" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
             <column name="CUSTOMER_ID" type="UUID"/>
         </createTable>
     </changeSet>

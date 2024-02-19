@@ -1,5 +1,6 @@
 package com.softprod.market.entities;
 
+import com.softprod.market.enums.PurchaseStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -24,22 +25,23 @@ import static jakarta.persistence.GenerationType.AUTO;
 public class Purchase {
 
     @Id
+    @EqualsAndHashCode.Exclude
     @GeneratedValue(strategy = AUTO)
     @Column(name = ID_COLUMN)
     private UUID id;
 
-    @Column(name = TOTAL_PRICE_COLUMN)
+    @Column(name = TOTAL_PRICE_COLUMN, nullable = false)
     private BigDecimal totalPrice;
 
-    @Column(name = PRODUCTS_NUM_COLUMN)
-    private int productsNum;
+    @Column(name = PRODUCTS_NUM_COLUMN, nullable = false)
+    private Integer productsNum;
 
     @Enumerated(STRING)
-    @Column(name = STATUS_COLUMN)
+    @Column(name = STATUS_COLUMN, nullable = false)
     private PurchaseStatus status;
 
     @ManyToOne
-    @JoinColumn(name = CUSTOMER_ID)
+    @JoinColumn(name = CUSTOMER_ID, updatable = false)
     private Customer customer;
 
     @ToString.Exclude

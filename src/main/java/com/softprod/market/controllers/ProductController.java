@@ -3,6 +3,7 @@ package com.softprod.market.controllers;
 import com.softprod.market.dto.requests.ProductDtoRequest;
 import com.softprod.market.dto.responses.ProductDtoResponse;
 import com.softprod.market.services.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class ProductController {
 
     @ResponseStatus(CREATED)
     @PostMapping(PRODUCT_URL)
-    public ProductDtoResponse createProduct(@RequestBody ProductDtoRequest request) {
+    public ProductDtoResponse createProduct(@RequestBody @Valid ProductDtoRequest request) {
         return productService.createProduct(request);
     }
 
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @PutMapping(PRODUCT_ID_URL)
-    public ProductDtoResponse updateProduct(@RequestBody ProductDtoRequest request, @PathVariable UUID id) {
+    public ProductDtoResponse updateProduct(@RequestBody @Valid ProductDtoRequest request, @PathVariable UUID id) {
         return productService.updateProduct(request, id);
     }
 

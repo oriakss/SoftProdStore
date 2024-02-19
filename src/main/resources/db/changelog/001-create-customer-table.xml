@@ -10,10 +10,18 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR"/>
-            <column name="EMAIL" type="VARCHAR"/>
-            <column name="LOGIN" type="VARCHAR"/>
-            <column name="PASSWORD" type="VARCHAR"/>
-            <column name="ROLE" type="VARCHAR"/>
+            <column name="EMAIL" type="VARCHAR">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="LOGIN" type="VARCHAR">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ROLE" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <sql>
             ALTER TABLE CUSTOMER

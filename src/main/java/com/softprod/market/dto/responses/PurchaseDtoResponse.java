@@ -1,6 +1,6 @@
 package com.softprod.market.dto.responses;
 
-import com.softprod.market.entities.PurchaseStatus;
+import com.softprod.market.enums.PurchaseStatus;
 import lombok.Builder;
 import lombok.Data;
 

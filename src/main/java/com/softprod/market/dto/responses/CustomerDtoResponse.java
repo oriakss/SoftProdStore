@@ -1,6 +1,6 @@
 package com.softprod.market.dto.responses;
 
-import com.softprod.market.entities.CustomerRole;
+import com.softprod.market.enums.CustomerRole;
 import lombok.Builder;
 import lombok.Data;
 

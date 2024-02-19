@@ -1,7 +1,7 @@
 package com.softprod.market.dto.responses;
 
-import com.softprod.market.entities.ProductCategory;
-import com.softprod.market.entities.ProductStatus;
+import com.softprod.market.enums.ProductCategory;
+import com.softprod.market.enums.ProductStatus;
 import lombok.Builder;
 import lombok.Data;
 

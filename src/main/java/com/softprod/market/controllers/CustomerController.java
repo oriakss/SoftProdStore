@@ -4,6 +4,7 @@ import com.softprod.market.dto.requests.CustomerDtoRequest;
 import com.softprod.market.dto.responses.CustomerDtoResponse;
 import com.softprod.market.mappers.CustomerMapper;
 import com.softprod.market.services.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class CustomerController {
 
     @ResponseStatus(CREATED)
     @PostMapping(CUSTOMER_LOWER)
-    public CustomerDtoResponse createCustomer(@RequestBody CustomerDtoRequest request) {
+    public CustomerDtoResponse createCustomer(@RequestBody @Valid CustomerDtoRequest request) {
         return customerService.createCustomer(request);
     }
 
@@ -38,7 +39,7 @@ public class CustomerController {
     }
 
     @PutMapping(CUSTOMER_ID_URL)
-    public CustomerDtoResponse updateCustomer(@RequestBody CustomerDtoRequest request, @PathVariable UUID id) {
+    public CustomerDtoResponse updateCustomer(@RequestBody @Valid CustomerDtoRequest request, @PathVariable UUID id) {
         return customerService.updateCustomer(request, id);
     }
 

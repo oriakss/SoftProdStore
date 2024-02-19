@@ -3,6 +3,7 @@ package com.softprod.market.controllers;
 import com.softprod.market.dto.requests.PurchaseDtoRequest;
 import com.softprod.market.dto.responses.PurchaseDtoResponse;
 import com.softprod.market.services.PurchaseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class PurchaseController {
     }
 
     @PutMapping(PURCHASE_ID_URL)
-    public PurchaseDtoResponse updatePurchase(@RequestBody PurchaseDtoRequest request, @PathVariable UUID id) {
+    public PurchaseDtoResponse updatePurchase(@RequestBody @Valid PurchaseDtoRequest request, @PathVariable UUID id) {
         return purchaseService.updatePurchase(request, id);
     }
 

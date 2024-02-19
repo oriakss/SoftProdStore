@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+
 @Configuration
 public class ApplicationConfig {
 
@@ -18,7 +21,7 @@ public class ApplicationConfig {
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:message");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding(UTF_8.name());
         return messageSource;
     }
 }

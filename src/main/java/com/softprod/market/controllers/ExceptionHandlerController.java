@@ -1,12 +1,13 @@
 package com.softprod.market.controllers;
 
-import com.softprod.market.exceptions.CustomerNotFoundException;
 import com.softprod.market.dto.responses.ErrorResponse;
+import com.softprod.market.exceptions.CustomerNotFoundException;
 import com.softprod.market.exceptions.ProductNotFoundException;
 import com.softprod.market.exceptions.PurchaseNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,8 +30,8 @@ public class ExceptionHandlerController {
     public ErrorResponse handleCustomerNotFoundException(CustomerNotFoundException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ErrorResponse.builder()
-                .message(messageSource.getMessage(CUSTOMER_NOT_FOUND_MESSAGE_KEY, new Object[]{exception.getMessage(),
-                        LocalDateTime.now()}, "Something went wrong.", getLocale()))
+                .message(messageSource.getMessage(CUSTOMER_NOT_FOUND_MESSAGE_KEY,
+                        new Object[]{exception.getMessage()}, getLocale()))
                 .time(LocalDateTime.now())
                 .build();
     }
@@ -40,8 +41,8 @@ public class ExceptionHandlerController {
     public ErrorResponse handleProductNotFoundException(ProductNotFoundException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ErrorResponse.builder()
-                .message(messageSource.getMessage(PRODUCT_NOT_FOUND_MESSAGE_KEY, new Object[]{exception.getMessage(),
-                        LocalDateTime.now()}, "Something went wrong.", getLocale()))
+                .message(messageSource.getMessage(PRODUCT_NOT_FOUND_MESSAGE_KEY,
+                        new Object[]{exception.getMessage()}, getLocale()))
                 .time(LocalDateTime.now())
                 .build();
     }
@@ -51,8 +52,18 @@ public class ExceptionHandlerController {
     public ErrorResponse handlePurchaseNotFoundException(PurchaseNotFoundException exception) {
         log.warn("EXCEPTION: {}", exception.getMessage());
         return ErrorResponse.builder()
-                .message(messageSource.getMessage(PURCHASE_NOT_FOUND_MESSAGE_KEY, new Object[]{exception.getMessage(),
-                        LocalDateTime.now()}, "Something went wrong.", getLocale()))
+                .message(messageSource.getMessage(PURCHASE_NOT_FOUND_MESSAGE_KEY,
+                        new Object[]{exception.getMessage()}, getLocale()))
+                .time(LocalDateTime.now())
+                .build();
+    }
+
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ErrorResponse handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+        log.warn("EXCEPTION: {}", exception.getMessage());
+        return ErrorResponse.builder()
+                .message(exception.getMessage())
                 .time(LocalDateTime.now())
                 .build();
     }

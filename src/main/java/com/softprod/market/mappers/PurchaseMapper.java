@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.softprod.market.entities.PurchaseStatus.IN_PROCESS;
+import static com.softprod.market.enums.PurchaseStatus.IN_PROCESS;
 import static java.math.BigDecimal.ZERO;
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 import static org.mapstruct.ReportingPolicy.IGNORE;

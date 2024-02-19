@@ -9,11 +9,21 @@
             <column name="ID" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="NAME" type="VARCHAR"/>
-            <column name="BRAND" type="VARCHAR"/>
-            <column name="CATEGORY" type="VARCHAR"/>
-            <column name="PRICE" type="VARCHAR"/>
-            <column name="STATUS" type="VARCHAR"/>
+            <column name="NAME" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BRAND" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <sql>
             ALTER TABLE PRODUCT

@@ -1,5 +1,6 @@
 package com.softprod.market.entities;
 
+import com.softprod.market.enums.CustomerRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -23,6 +24,7 @@ import static jakarta.persistence.GenerationType.AUTO;
 public class Customer {
 
     @Id
+    @EqualsAndHashCode.Exclude
     @GeneratedValue(strategy = AUTO)
     @Column(name = ID_COLUMN)
     private UUID id;
@@ -30,17 +32,17 @@ public class Customer {
     @Column(name = NAME_COLUMN)
     private String name;
 
-    @Column(name = EMAIL_COLUMN)
+    @Column(name = EMAIL_COLUMN, nullable = false, unique = true)
     private String email;
 
-    @Column(name = LOGIN_COLUMN)
+    @Column(name = LOGIN_COLUMN, nullable = false, unique = true)
     private String login;
 
-    @Column(name = PASSWORD_COLUMN)
+    @Column(name = PASSWORD_COLUMN, nullable = false)
     private String password;
 
     @Enumerated(STRING)
-    @Column(name = ROLE_COLUMN)
+    @Column(name = ROLE_COLUMN, nullable = false)
     private CustomerRole customerRole;
 
     @ToString.Exclude
