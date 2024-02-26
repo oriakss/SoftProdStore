@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/001-create-customer-table.yaml
+  - include:
+      file: classpath:db/changelog/002-fill-customer-table.yaml
+  - include:
+      file: classpath:db/changelog/003-create-product-table.yaml
+  - include:
+      file: classpath:db/changelog/004-fill-product-table.yaml
+  - include:
+      file: classpath:db/changelog/005-create-customer_product-table.yaml
+  - include:
+      file: classpath:db/changelog/006-create-purchase-table.yaml
+  - include:
+      file: classpath:db/changelog/007-create-purchase_product-table.yaml

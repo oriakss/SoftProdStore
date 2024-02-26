@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-customer-table
+      author: oriakss
+      changes:
+        - createTable:
+            tableName: CUSTOMER
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  defaultValueComputed: 'uuid_generate_v4()'
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: varchar
+              - column:
+                  name: EMAIL
+                  type: varchar
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: LOGIN
+                  type: varchar
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: PASSWORD
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ROLE
+                  type: varchar
+                  constraints:
+                    nullable: false
