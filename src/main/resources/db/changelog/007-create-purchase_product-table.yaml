@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-create-purchase_product-table
+      author: oriakss
+      changes:
+        - createTable:
+            tableName: PURCHASE_PRODUCT
+            columns:
+              - column:
+                  name: PURCHASE_ID
+                  type: UUID
+              - column:
+                  name: PRODUCT_ID
+                  type: UUID

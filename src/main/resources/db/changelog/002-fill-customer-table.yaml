@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-fill-customer-table
+      author: oriakss
+      changes:
+        - insert:
+            tableName: CUSTOMER
+            columns:
+              - column:
+                  name: NAME
+                  value: Admin
+              - column:
+                  name: EMAIL
+                  value: admin@email.com
+              - column:
+                  name: LOGIN
+                  value: admin
+              - column:
+                  name: PASSWORD
+                  value: admin
+              - column:
+                  name: ROLE
+                  value: ADMIN
+        - insert:
+            tableName: CUSTOMER
+            columns:
+              - column:
+                  name: NAME
+                  value: Customer1
+              - column:
+                  name: EMAIL
+                  value: customer1@email.com
+              - column:
+                  name: LOGIN
+                  value: customer1
+              - column:
+                  name: PASSWORD
+                  value: customer1
+              - column:
+                  name: ROLE
+                  value: CUSTOMER
+        - insert:
+            tableName: CUSTOMER
+            columns:
+              - column:
+                  name: NAME
+                  value: Customer2
+              - column:
+                  name: EMAIL
+                  value: customer2@email.com
+              - column:
+                  name: LOGIN
+                  value: customer2
+              - column:
+                  name: PASSWORD
+                  value: customer2
+              - column:
+                  name: ROLE
+                  value: CUSTOMER

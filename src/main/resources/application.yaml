@@ -1,0 +1,12 @@
+spring:
+  # datasource config
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: root
+  # jpa config
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true

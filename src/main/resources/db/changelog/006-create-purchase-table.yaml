@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-create-purchase-table
+      author: oriakss
+      changes:
+        - createTable:
+            tableName: PURCHASE
+            columns:
+              - column:
+                  name: ID
+                  type: UUID
+                  defaultValueComputed: 'uuid_generate_v4()'
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: TOTAL_PRICE
+                  type: numeric
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PRODUCTS_COUNT
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: STATUS
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CUSTOMER_ID
+                  type: UUID

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-customer_product-table
+      author: oriakss
+      changes:
+        - createTable:
+            tableName: CUSTOMER_PRODUCT
+            columns:
+              - column:
+                  name: CUSTOMER_ID
+                  type: UUID
+              - column:
+                  name: PRODUCT_ID
+                  type: UUID
